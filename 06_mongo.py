@@ -1,6 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from pymongo import MongoClient
+from flask import Flask, render_template, redirect, session, flash, request
+from util import questions, images
+from functools import wraps
+import os
 import urllib2
 import json
 
@@ -15,7 +19,6 @@ import json
                                 set up & functions
 ================================================================================
 '''
-
 
 c = MongoClient('lisa.stuy.edu', 27017)
 db = c[u'+X米X+']
@@ -83,3 +86,14 @@ if(False):
                                     app stuffs
 ================================================================================
 '''
+
+app = Flask(__name__)
+app.secret_key = os.urandom(32)
+
+@app.route('/')
+def home():
+    pass
+
+@app.route('process')
+def do_stuffs():
+    pass
