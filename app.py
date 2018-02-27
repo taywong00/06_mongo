@@ -36,32 +36,24 @@ if(p.count() == 0):
 # searches by type
 def find_t(t):
     d = p.find({"type": t})
-    for doc in d:
-        print doc
     return d
 
 
 # searches by weaknesses
 def find_w(w):
     d = p.find({"weaknesses": w})
-    for doc in d:
-        print doc
     return d
 
 
 # searches by type and weaknesses
 def find_tw(t, w):
     d = p.find({"$and": [{"type": t}, {"weaknesses": w}]})
-    for doc in d:
-        print doc
     return d
 
 
 # searches by average spawns
 def find_s(s):
     d = p.find({"avg_spawns": {"$lt": s}})
-    for doc in d:
-        print doc
     return d
 
 
@@ -110,7 +102,7 @@ def do_stuffs():
         final = []
         for pokemon in result:
             final.append(pokemon)
-        print final
+        print len(final)
         return render_template('results.html', message="your " + op + " input returned these pokemon", list=final)
 
 
