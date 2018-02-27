@@ -1,17 +1,15 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from pymongo import MongoClient
-from flask import Flask, render_template, redirect, session, flash, request
-from util import questions, images
-from functools import wraps
+from flask import Flask, render_template, request
 import os
 import urllib2
 import json
 
 # Charles Weng, Taylor Wong
 # SoftDev2 pd7
-# K #04: Mi only nyam ital food, mon!
-# 2018-02-15
+# 06: Ay Mon, Go Git It From Yer Flask
+# 2018-02-27
 
 
 '''
@@ -90,10 +88,32 @@ if(False):
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
 
+
 @app.route('/')
 def home():
-    pass
+    return render_template("index.html")
 
-@app.route('process')
+
+@app.route('/process', methods=["POST"])
 def do_stuffs():
-    pass
+    op = request.form.get('option')
+    inputt = request.form.get('input')
+    if op == 'type':
+        result = find_t(inputt)
+    elif op == 'weakness':
+        result = find_w(inputt)
+    else:
+        result = find_s(int(inputt))
+    if result.count() == 0:
+        return render_template("results.html", message="no pokemon found")
+    else:
+        final = []
+        for pokemon in result:
+            final.append(pokemon)
+        print final
+        return render_template('results.html', message="your " + op + " input returned these pokemon", list=final)
+
+
+if __name__ == "__main__":
+    app.debug = True
+    app.run()

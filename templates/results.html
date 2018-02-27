@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PokeMongo</title>
+</head>
+<body>
+  <center>
+    {{message}}
+    <br>
+    {{list.length}}
+    <ol>
+      {% for poke in list %}
+        <li>{{poke['name']}}</li><br>
+      {% endfor %}
+    </ol>
+  </center>
+</body>
+</html>
